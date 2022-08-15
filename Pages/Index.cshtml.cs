@@ -7,13 +7,16 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    private readonly IConfiguration Configuration;
+
+    public IndexModel(ILogger<IndexModel> logger,IConfiguration configuration)
     {
         _logger = logger;
+        Configuration = configuration;
     }
 
     public void OnGet()
     {
-
+        ViewData["AppTitle"] = Configuration["AppTitle"];
     }
 }
