@@ -18,5 +18,6 @@ public class IndexModel : PageModel
     public void OnGet()
     {
         ViewData["AppTitle"] = Configuration["AppTitle"];
+        ViewData["Copyrigth"] = DateTime.Now.Year;
     }
 }
