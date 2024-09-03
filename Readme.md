@@ -1,41 +1,49 @@
-# Challenge for Azure Developer Students
-Create a web project and upload it to Git for deployment on Azure App Service from a Git repository.
+# Challenge for Azure Developer Students :green_apple:
+## Deployment on Azure App Service from a published content and zipped :cloud:	
 
-> **Note:** If you make changes in the code and want to deploy it, consider building with the following commands:
+> [!NOTE]
+>
+> if you make changes in the code and want to deploy it, consider building with the following commands:
 >
 > `dotnet publish --configuration Release --output publish`
-
-**Compress destination path and its content:**
-
-`Compress-Archive -Path .\publish\* -DestinationPath WebAppMasterDotNet6.zip -Force`
-
-## Create the specific resource for your web app before doing the deployment
-
-**Resource Group:**
-
-`az group create --name [ResourceGroup Name] --location [name]`
-
-**Service Plan and Pricing:**
-
-`az appservice plan create --name [plan name] --resource-group [ResourceGroup name] --sku B1 --is-linux`
-
-> **Note:** To determine the available runtimes before deployment
 >
-> `az webapp list-runtimes --linux`
+> **Compress destination path and its content:**
+>
+> `Compress-Archive -Path .\publish\* -DestinationPath WebAppMasterDotNet6.zip -Force`
 
-**Web App Services:**
+### Create the specific resource for your web app before doing the deployment
 
-`az webapp create -g [ResourceGroup name] -p [plan name] -n [webapp service name] --runtime DOTNETCORE:6.0"`
+1. **Resource Group:**
 
-**Deploy to Azure (whether you have changed the code or not):**
+   `az group create --name [ResourceGroup Name] --location [name]`
 
-`az webapp deploy --resource-group [ResourceGroup name] --name [webapp service name] --src-path WebAppMasterDotNet6.zip`
+2. **Service Plan and Pricing:**
 
-**Testing:**
+   `az appservice plan create --name [plan name] --resource-group [ResourceGroup name] --sku B1 --is-linux`
 
-If everything has gone well, you should be able to navigate to the URL of the App Service and see the following page.
+   > [!IMPORTANT]
+   >
+   > To determine the available runtimes before deployment
+   >
+   > `az webapp list-runtimes --linux`
 
-![](img/01.png)
+3. **Web App Services:**
+
+   `az webapp create -g [ResourceGroup name] -p [plan name] -n [webapp service name] --runtime DOTNETCORE:6.0"`
+
+### Start deployment
+
+- **Deploy to Azure (whether you have changed the code or not):**
+
+  `az webapp deploy --resource-group [ResourceGroup name] --name [webapp service name] --src-path WebAppMasterDotNet6.zip`
+
+### **Testing**
+
+- **Opening a web browser**
+
+  If everything has gone well, you should be able to navigate to the URL of the App Service and see the following page.
+
+  ![](img/01.png)
 
 ## Conclusion
 
