@@ -21,11 +21,11 @@
 
    `az appservice plan create --name [plan name] --resource-group [ResourceGroup name] --sku B1 --is-linux`
 
-   > [!IMPORTANT]
-   >
-   > To determine the available runtimes before deployment
-   >
-   > `az webapp list-runtimes --linux`
+> [!IMPORTANT]
+>
+> To determine the available runtimes before deployment
+>
+> `az webapp list-runtimes --linux`
 
 3. **Web App Services:**
 
@@ -59,5 +59,23 @@ In this challenge, you have the opportunity to create a web project, upload it t
 az account set --subscription [Subscription ID]
 az login
 az group list --output table
+```
+
+> All commands used here to create your own scripts ​on **​pow​er​sh​el​l:smile_cat:**
+
+```powershell
+$RG-Group="[ResourceGroup Name]"
+$Location="[name]"
+$PlanName="[plan name]"
+$WaS="[webapp service name]"
+
+dotnet publish --configuration Release --output publish
+Compress-Archive -Path .\publish\* -DestinationPath WebAppMasterDotNet6.zip -Force
+
+az group create --name $RG-Group --location $Location
+az appservice plan create --name $PlanName --resource-group $RG-Group --sku B1 --is-linux
+az webapp create -g $RG-Group -p $PlanName -n $WaS --runtime DOTNETCORE:6.0"
+
+az webapp deploy --resource-group $RG-Group --name $WaS --src-path WebAppMasterDotNet6.zip`
 ```
 
