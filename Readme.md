@@ -64,18 +64,25 @@ az group list --output table
 > All commands used here to create your own scripts ​on **​pow​er​sh​el​l** :smile_cat:
 
 ```powershell
-$RG-Group="[ResourceGroup Name]"
+$RG_Group="[ResourceGroup Name]"
 $Location="[name]"
 $PlanName="[plan name]"
 $WaS="[webapp service name]"
 
+Write-Output "publishing and compressing the project for deployment"
 dotnet publish --configuration Release --output publish
 Compress-Archive -Path .\publish\* -DestinationPath WebAppMasterDotNet6.zip -Force
 
-az group create --name $RG-Group --location $Location
-az appservice plan create --name $PlanName --resource-group $RG-Group --sku B1 --is-linux
-az webapp create -g $RG-Group -p $PlanName -n $WaS --runtime DOTNETCORE:6.0"
+Write-Output "Creating resource group: $RG_Group in location: $Location"
+az group create --name $RG_Group --location $Location
 
-az webapp deploy --resource-group $RG-Group --name $WaS --src-path WebAppMasterDotNet6.zip`
+Write-Output "Creating App Service plan: $PlanName in resource group: $RG_Group"
+az appservice plan create --name $PlanName --resource-group $RG_Group --sku B1 --is-linux
+
+Write-Output "Creating App Service: $WaS in resource group: $RG_Group with plan: $PlanName"
+az webapp create -g $RG_Group -p $PlanName -n $WaS --runtime DOTNETCORE:6.0"
+
+Write-Output "Deploying the compressed file WebAppMasterDotNet6.zip to App Service: $WaS"
+az webapp deploy --resource-group $RG_Group --name $WaS --src-path WebAppMasterDotNet6.zip`
 ```
 
