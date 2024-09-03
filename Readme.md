@@ -61,7 +61,7 @@ az login
 az group list --output table
 ```
 
-> All commands used here to create your own scripts ​on **​pow​er​sh​el​l:smile_cat:**
+> All commands used here to create your own scripts ​on **​pow​er​sh​el​l** :smile_cat:
 
 ```powershell
 $RG-Group="[ResourceGroup Name]"
