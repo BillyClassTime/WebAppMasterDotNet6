@@ -3,11 +3,11 @@ Create a web project and upload it to Git for deployment on Azure App Service fr
 
 > **Note:** If you make changes in the code and want to deploy it, consider building with the following commands:
 >
-> `dotnet publish --configuration Release --output out`
+> `dotnet publish --configuration Release --output publish`
 
 **Compress destination path and its content:**
 
-Compress-Archive -Path .\out\* -DestinationPath WebAppMasterDotNet6.zip -Force
+`Compress-Archive -Path .\publish\* -DestinationPath WebAppMasterDotNet6.zip -Force`
 
 ## Create the specific resource for your web app before doing the deployment
 
@@ -29,7 +29,7 @@ Compress-Archive -Path .\out\* -DestinationPath WebAppMasterDotNet6.zip -Force
 
 **Deploy to Azure (whether you have changed the code or not):**
 
-`az webapp deployment source config-zip --resource-group [ResourceGroup Name] --src .\WebAppMasterDotNet6.zip --name [webapp service name]`
+`az webapp deploy --resource-group [ResourceGroup name] --name [webapp service name] --src-path WebAppMasterDotNet6.zip`
 
 **Testing:**
 
@@ -42,3 +42,14 @@ If everything has gone well, you should be able to navigate to the URL of the Ap
 In this challenge, you have the opportunity to create a web project, upload it to Git, and deploy it on Azure App Service from a Git repository. Before deployment, build the project with specified commands, create necessary resources including a resource group, services plan, and pricing. Verify available runtimes with the provided command. Finally, deploy to Azure using the given deployment command, whether code changes were made or not.
 
 **Happy Coding!**
+
+
+
+> :wink: **Remember to connect to Azure**
+
+```powershell
+az account set --subscription [Subscription ID]
+az login
+az group list --output table
+```
+
